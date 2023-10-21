@@ -20,7 +20,7 @@ func TestTransferTx(t *testing.T) {
 
 	errs := make(chan error)
 	results := make(chan TransferTxResult)
-	
+
 	//run n concurrent transfer transaction
 	for i := 0; i < n; i++ {
 		go func() {
@@ -121,13 +121,13 @@ func TestTransferTxDeadlock(t *testing.T) {
 	n := 10
 	amount := int64(10)
 	errs := make(chan error)
-	
+
 	//run n concurrent transfer transaction
 	for i := 0; i < n; i++ {
 		fromAccountID := account1.ID
 		toAccountID := account2.ID
 
-		if i % 2 == 1{
+		if i%2 == 1 {
 			fromAccountID = account2.ID
 			toAccountID = account1.ID
 		}
@@ -139,7 +139,7 @@ func TestTransferTxDeadlock(t *testing.T) {
 				ToAccountID:   toAccountID,
 				Amount:        amount,
 			})
-			
+
 			errs <- err
 		}()
 	}
