@@ -1,9 +1,10 @@
 package util
 
 import (
-    "math/rand"
-    "strings"
-    "time"
+	"fmt"
+	"math/rand"
+	"strings"
+	"time"
 )
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -33,16 +34,24 @@ func RandomString(n int) string {
     return sb.String()
 }
 
+// generates a random owner name
 func RandomOwner() string {
     return RandomString(6)
 }
 
+// generates a random amount of money
 func RandomMoney() int64 {
     return RandomInt(0, 1000)
 }
 
+// generates a random currency code
 func RandomCurrency() string {
     currencies := []string{EUR, USD, IDR}
     n := len(currencies)
     return currencies[rng.Intn(n)]
+}
+
+// generates a random email 
+func RandomEmail() string {
+    return fmt.Sprintf("%s@email.com", RandomString(6))
 }
