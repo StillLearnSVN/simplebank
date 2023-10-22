@@ -22,7 +22,7 @@ type createUserRequest struct {
 	Username string `json:"username" binding:"required,alphanum"`
 	Password string `json:"password" binding:"required,min=6"`
 	Fullname string `json:"full_name" binding:"required"`
-	Emai     string `json:"email" binding:"required,email"`
+	Email     string `json:"email" binding:"required,email"`
 }
 
 func (server *Server) createUser(ctx *gin.Context) {
@@ -35,14 +35,14 @@ func (server *Server) createUser(ctx *gin.Context) {
 	hashedPassword, err := util.HashPassword(req.Password)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return		
+		return
 	}
 
 	arg := db.CreateUserParams{
-		Username: req.Username,
+		Username:       req.Username,
 		HashedPassword: hashedPassword,
-		FullName: req.Fullname,
-		Email: req.Emai,
+		FullName:       req.Fullname,
+		Email:          req.Email,
 	}
 
 	user, err := server.store.CreateUser(ctx, arg)
@@ -58,12 +58,12 @@ func (server *Server) createUser(ctx *gin.Context) {
 		return
 	}
 
-	rsp := createUserResponse {
-		Username: user.Username,
-		FullName: user.FullName,
-		Email: user.Email,
+	rsp := createUserResponse{
+		Username:          user.Username,
+		FullName:          user.FullName,
+		Email:             user.Email,
 		PasswordChangedAt: user.PasswordChangedAt,
-		CreatedAt: user.CreatedAt,
+		CreatedAt:         user.CreatedAt,
 	}
 	ctx.JSON(http.StatusOK, rsp)
 }

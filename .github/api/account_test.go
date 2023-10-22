@@ -39,7 +39,7 @@ func TestGetAccountAPI(t *testing.T) {
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
 
-				requirezBodyMatchAccount(t, recorder.Body, account)
+				requireBodyMatchAccount(t, recorder.Body, account)
 			},
 		},
 
@@ -120,7 +120,7 @@ func randomAccount() db.Account {
 	}
 }
 
-func requirezBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Account) {
+func requireBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Account) {
 	data, err := ioutil.ReadAll(body)
 	require.NoError(t, err)
 
