@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/StillLearnSVN/simplebank/.github/api"
+	"github.com/StillLearnSVN/simplebank/api"
 	db "github.com/StillLearnSVN/simplebank/db/sqlc"
 	"github.com/StillLearnSVN/simplebank/util"
 	_ "github.com/lib/pq"
